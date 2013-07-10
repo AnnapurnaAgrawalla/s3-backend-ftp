@@ -1,0 +1,80 @@
+1. Download this project from github as zip and extract it.
+
+Important: 
+
+Before running this Application you should install the following Gems:
+
+gem install eventmachine
+gem install em-ftpd
+gem install aws-s3
+
+2. Open the command prompt window Go to the directory where you unzipped the project.
+
+3. Enter "em-ftpd config.rb" command.
+  You will see the output as
+	Starting ftp server on 0.0.0.0:9091
+
+4. Now open new command prompt window in new tab.
+
+5. Type "ftp 127.0.0.1 9091" command.
+	you will see Connected to 127.0.0.1.
+
+6. You will be asked username and password.You can get that one in users.txt.
+
+7. After entering username and password you can use other functions using following commands: 
+
+put file_name.extension (To Upload A File Into Remote Server)
+
+get file_name.extension (To Download A File From Remote Server)
+
+delete file_name.extension (To Delete A File From Remote Server)
+
+size file_name.extension (To Get Size Of A File)
+
+cd .. (To Goto Parent Directory Of Remote Server)
+
+lcd .. (To Goto Parent Directory Of Local Server)
+
+pwd (To See The Current Remote Directory)
+
+lcd (To See The Current Local Directory)
+
+cd /pathname (To Navigate To Other Directories Of Remote Server)
+
+lcd /pathname (To Navigate To Other Directories Of Local Server)
+
+dir (To List Remote Directory Contents)
+
+ls (To List Remote Directory Contents)
+
+Note: 
+
+The following gems are required for automated testing:
+
+gem install cucumber 
+gem install vcr 
+gem install rspec 
+gem install webmock
+
+Cucumber Testing Instructions:
+
+Three Support Files listed under Cucumber Testing:
+* login.feature
+* download.feature
+* upload.feature
+
+To Run these Tests:
+1. Go to cucumber directory.
+2. Run the following command: "cucumber features/testfilename"
+	for example: cucumber features/login.feature
+3. Edit the .feature and _steps.rb files and continue testing.
+
+Rspec Testing Instructions:
+
+Two spec test files Listed Under Rspec Testing:
+*server_spec.rb
+connection_spec.rb
+
+1. Run the following command: "rspec spec/testfilename:linenumber"
+	for example: rspec spec/server_spec.rb:21
+2. Edit the _spec.rb files and continue testing.
