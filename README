@@ -78,3 +78,4 @@ To Run Rspec Tests:
 1. Run the following command: "rspec spec/testfilename:linenumber"
 	for example: rspec spec/server_spec.rb:21
 2. Edit the _spec.rb files and continue testing.
+
