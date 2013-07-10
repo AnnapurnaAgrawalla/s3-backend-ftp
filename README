@@ -2,7 +2,7 @@
 
 Important: 
 
-Before running this Application you should install the following Gems:
+Before running this Application you should run the following commands to install the gems eventmachine, em-ftpd, aws-s3:
 
 gem install eventmachine
 gem install em-ftpd
@@ -16,7 +16,8 @@ gem install aws-s3
 
 4. Now open new command prompt window in new tab.
 
-5. Type "ftp 127.0.0.1 9091" command.
+5. Type "ftp localhost port-number" command.
+	for example: ftp 127.0.0.1 9091
 	you will see Connected to 127.0.0.1.
 
 6. You will be asked username and password.You can get that one in users.txt.
@@ -49,7 +50,7 @@ ls (To List Remote Directory Contents)
 
 Note: 
 
-The following gems are required for automated testing:
+Run the following commands to install cucumber, vcr, rspec and webmock gems which are required for automated testing:
 
 gem install cucumber 
 gem install vcr 
@@ -63,7 +64,7 @@ Three Support Files listed under Cucumber Testing:
 * download.feature
 * upload.feature
 
-To Run these Tests:
+To Run Cucumber Tests:
 1. Go to cucumber directory.
 2. Run the following command: "cucumber features/testfilename"
 	for example: cucumber features/login.feature
@@ -75,6 +76,7 @@ Two spec test files Listed Under Rspec Testing:
 * server_spec.rb
 * connection_spec.rb
 
+To Run Rspec Tests:
 1. Run the following command: "rspec spec/testfilename:linenumber"
 	for example: rspec spec/server_spec.rb:21
 2. Edit the _spec.rb files and continue testing.
