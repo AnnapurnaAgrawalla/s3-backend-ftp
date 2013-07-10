@@ -7,22 +7,19 @@ require 'aws/s3'
 require "rexml/document"
 include REXML
 AWS::S3
-class FakeFTPDriver
+class FTPDriver
 
   attr_accessor :username, :password
   $key = 'AKIAJFPIHK4NAK4WUM5A'                                #This is access_key_id
   $skey = 'ra+rjapL9hdTIsVLK0VUCRuaxkuTeXlkcTj7bmgB'           #This is secret_access_key
   $bkt = 'em-ftpd-trial/annapurna'                          #This is bucket name
 
-  FILE_ONE = "file does not exist"
-  FILE_TWO = "This is the file number two.\n\n2009-03-21"
-  
   
 #user authentication code
   def authenticate(user, pass, &block)
     userArray = []
    
-	userArray = FakeFTPDriver.find                           #calling to find function 
+	userArray = FTPDriver.find                           #calling to find function 
     userArray.each do |p|
         if user == p.username && pass == p.password          #to checking correct username & password
 	    yield true
@@ -37,7 +34,7 @@ class FakeFTPDriver
 	 if file_usable?                                     #here calling to file usable? function
 		  file = File.new('users.txt','r')                  #open users file for checking username and password
 		 file.each_line do |line|
-		    userArray << FakeFTPDriver.new.import_line(line.chomp)      #here taking each line from file
+		    userArray << FTPDriver.new.import_line(line.chomp)      #here taking each line from file
 		 end
 		file.close
 	else
