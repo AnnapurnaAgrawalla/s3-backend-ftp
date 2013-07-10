@@ -1,7 +1,6 @@
 1. Download this project from github as zip and extract it.
 
 Important: 
-
 Before running this Application you should run the following commands to install the gems eventmachine, em-ftpd, aws-s3:
 
 gem install eventmachine
@@ -49,7 +48,6 @@ dir (To List Remote Directory Contents)
 ls (To List Remote Directory Contents)
 
 Note: 
-
 Run the following commands to install cucumber, vcr, rspec and webmock gems which are required for automated testing:
 
 gem install cucumber 
