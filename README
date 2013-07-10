@@ -72,8 +72,8 @@ To Run these Tests:
 Rspec Testing Instructions:
 
 Two spec test files Listed Under Rspec Testing:
-*server_spec.rb
-connection_spec.rb
+* server_spec.rb
+* connection_spec.rb
 
 1. Run the following command: "rspec spec/testfilename:linenumber"
 	for example: rspec spec/server_spec.rb:21
