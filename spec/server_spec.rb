@@ -332,7 +332,6 @@ describe EM::FTPD::Server, "LIST" do
     @c.oobdata.split(EM::FTPD::Server::LBRK).should eql(dir_files)
   end
 
-  it "should respond with 150 ... 226 when called in the files dir with wildcard (LIST *.txt)"
 
   it "should respond with 150 ... 226 when called in the subdir with .. param" do
     @c.receive_line("USER test")
@@ -375,8 +374,6 @@ describe EM::FTPD::Server, "LIST" do
     @c.sent_data.should match(/150.+226.+/m)
     @c.oobdata.split(EM::FTPD::Server::LBRK).should eql(dir_files)
   end
-
-  it "should properly list subdirs etc."
 
 end
 
@@ -644,18 +641,6 @@ describe EM::FTPD::Server, "RNTO" do
     @c.reset_sent!
     @c.receive_line("RNTO")
     @c.sent_data.should match(/553.+/)
-  end
-
-  it "should respond with XXX when the RNFR command is omitted"
-
-  it "should respond with 250 when the file is renamed" do
-    @c.receive_line("USER test")
-    @c.receive_line("PASS 1234")
-    @c.reset_sent!
-    @c.reset_sent!
-    @c.receive_line("RNFR one.txt")
-    @c.receive_line("RNTO two.txt")
-    @c.sent_data.should match(/250.+/)
   end
 
   it "should respond with 550 when the file is not renamed" do
