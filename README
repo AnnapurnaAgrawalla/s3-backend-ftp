@@ -10,8 +10,14 @@ gem install aws-s3
 2. Open the command prompt window Go to the directory where you unzipped the project.
 
 3. Enter "em-ftpd config.rb" command.
-  You will see the output as
+   You will see the output as
 	Starting ftp server on 0.0.0.0:9091
+
+Note:
+If you want to use TLS:
+Use "em-ftpd-modified" instead of using regular gem.
+You need to use your own key file as "server.key" and certificates as "server.crt" which can be passed as arguments.
+These two files can be stored inside the temp folder or else you can change their path of /s3-backend-ftp/em-ftpd-modified/lib/em-ftpd/server.rb
 
 4. Now open new command prompt window in new tab.
 
