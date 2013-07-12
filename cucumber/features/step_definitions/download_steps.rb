@@ -1,3 +1,11 @@
-Then /^I should get a download with the filename "([^\"]*)"$/ do |filename|
-       page.response_headers['Content-Disposition'].should include("filename=\"#{filename}\"")
-    end
+When(/^I want to "(.*?)" a file$/) do |arg1|
+  arg1 = "get"
+end
+
+Then(/^I should enter "(.*?)" command and the "(.*?)"$/) do |arg1, arg2|
+ arg1 = "get"
+ arg2 = "filename.extension"
+end
+
+Then(/^I should get the downloaded file/) do 
+end

@@ -1,17 +1,27 @@
-Given /^a registered user$/ do 
-  visit '/login' 
-end 
+Given(/^a "(.*?)" has an account$/) do |arg1|
+end
 
-When /^he clicks on login link$/ do 
-  visit '/login' 
-  fill_in("login", :with => "test") 
-  fill_in("password", :with => "test123") 
-  click_button "Log in" 
-  p current_url 
-  p response.body 
-end 
+When(/^the "(.*?)" tries to log in with invalid information$/) do |arg1|
+  
+end
 
-Then /^that user should get created$/ do 
-  @user = User.find_by_login("test") 
-  @user.test.should == "test" 
-end 
+Then(/^the "(.*?)" should see an log in error message$/) do |arg1|
+end
+
+When(/^the "(.*?)" logs in$/) do |arg1|
+end
+
+Then(/^the "(.*?)" should see an log in success message$/) do |arg1|
+end
+
+Then(/^the "(.*?)" should see a sign out link$/) do |arg1|
+end
+
+Given(/^a signed in "(.*?)"$/) do |arg1|
+end
+
+Then(/^the "(.*?)" logs out$/) do |arg1|
+end
+
+Then(/^the "(.*?)" should see an log out success message$/) do |arg1|
+end
