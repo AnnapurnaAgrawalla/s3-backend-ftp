@@ -9,3 +9,6 @@ end
 
 Then(/^I should get the downloaded file/) do 
 end
+
+Then(/^the file should get downloaded\.$/) do
+end

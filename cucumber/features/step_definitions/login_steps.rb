@@ -25,3 +25,6 @@ end
 
 Then(/^the "(.*?)" should see an log out success message$/) do |arg1|
 end
+
+Then(/^the "(.*?)" use the "(.*?)" instead of regular gem\.$/) do |arg1, arg2|
+end

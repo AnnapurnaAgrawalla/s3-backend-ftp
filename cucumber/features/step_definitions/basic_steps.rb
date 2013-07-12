@@ -21,3 +21,12 @@ end
 
 Then(/^Server should always respond with (\d+) when the file is deleted$/) do |arg1|
 end
+
+Given(/^Client should use "(.*?)" instead of regular gem\.$/) do |arg1|
+end
+
+Then(/^Client should get connected to the server\.$/) do
+end
+
+Then(/^Client should get connected to the server and entered Passive Mode\.$/) do
+end

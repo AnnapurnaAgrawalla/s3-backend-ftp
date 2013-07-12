@@ -16,4 +16,9 @@ Scenario: Successful logout
     Then the "user" logs out
     And the "user" should see an log out success message 
 	
-	
+Scenario: Successful login through TLS
+    Given a "user" has an account
+    Then the "user" use the "em-ftpd-modified" instead of regular gem.
+    When the "user" logs in
+    Then the "user" should see an log in success message
+    And the "user" should see a sign out link

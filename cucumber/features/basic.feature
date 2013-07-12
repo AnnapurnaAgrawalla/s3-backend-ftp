@@ -9,8 +9,20 @@ Feature: directory operations
     When Client send cmd "PWD"
     Then Server should respond with 257 "/" when called from root dir
 
+  Scenario: PWD, print working directory through TLS
+    Given Client should use "em-ftpd-modified" instead of regular gem. 
+    Then Client should get connected to the server.
+    When Client send cmd "PWD"
+    Then Server should respond with 257 "/" when called from root dir
+
   Scenario: CH, change working directory
     Given Client has connected to server
+    When Client send cmd "CH dir_name"
+    Then Server should respond with 250 "command successful" when called with valid directory name
+
+  Scenario: CH, change working directory through TLS
+    Given Client should use "em-ftpd-modified" instead of regular gem. 
+    Then Client should get connected to the server.
     When Client send cmd "CH dir_name"
     Then Server should respond with 250 "command successful" when called with valid directory name
 
@@ -19,12 +31,30 @@ Feature: directory operations
     When Client send cmd "DIR"
     Then Server should respond with 150 when called in the root dir with no param
 
+  Scenario: DIR, list directory content through TLS
+    Given Client should use "em-ftpd-modified" instead of regular gem. 
+    Then Client should get connected to the server and entered Passive Mode.
+    When Client send cmd "DIR"
+    Then Server should respond with 150 when called in the root dir with no param
+
   Scenario: SIZE, get a file size
     Given Client has connected to server
     When Client send cmd "SIZE one.txt"
     Then Server should always respond with 213 when called with a valid file param
 
+  Scenario: SIZE, get a file size through TLS
+    Given Client should use "em-ftpd-modified" instead of regular gem. 
+    Then Client should get connected to the server.
+    When Client send cmd "SIZE one.txt"
+    Then Server should always respond with 213 when called with a valid file param
+
   Scenario: DELETE, delete a file
     Given Client has connected to server
+    When Client send cmd "DELETE one.txt"
+    Then Server should always respond with 250 when the file is deleted
+
+  Scenario: DELETE, delete a file
+    Given Client should use "em-ftpd-modified" instead of regular gem. 
+    Then Client should get connected to the server.
     When Client send cmd "DELETE one.txt"
     Then Server should always respond with 250 when the file is deleted
