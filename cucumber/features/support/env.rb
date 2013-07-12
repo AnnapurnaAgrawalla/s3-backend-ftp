@@ -1,5 +1,5 @@
 ENV['FORCE_COLOR'] = 'true'
-=begin
+
 require 'aruba/api'
 require 'aruba/cucumber'
 
@@ -20,13 +20,12 @@ end
 
 Before do
   # Make sure bin/cucumber runs with SimpleCov enabled
-  # set_env('SIMPLECOV', 'true')
+   set_env('SIMPLECOV', 'true')
   
   # Set a longer timeout for aruba
-  @aruba_timeout_seconds = 15
+  @aruba_timeout_seconds = 20
 end
 
 After do
   terminate_background_jobs
 end
-=end
