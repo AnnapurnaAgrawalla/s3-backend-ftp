@@ -17,7 +17,7 @@ Note:
 If you want to use TLS:
 Use "em-ftpd-modified" instead of using regular gem.
 You need to use your own key file as "server.key" and certificates as "server.crt" which can be passed as arguments.
-These two files can be stored inside the temp folder or else you can change their path of /s3-backend-ftp/em-ftpd-modified/lib/em-ftpd/server.rb
+These two files can be stored inside the tmp folder or else you can change their paths inside /s3-backend-ftp/em-ftpd-modified/lib/em-ftpd/server.rb
 
 4. Now open new command prompt window in new tab.
 
