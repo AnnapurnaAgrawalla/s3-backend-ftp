@@ -12,9 +12,33 @@ class FTPDriver
   attr_accessor :username, :password
   $key = 'AKIAJFPIHK4NAK4WUM5A'                                #This is access_key_id
   $skey = 'ra+rjapL9hdTIsVLK0VUCRuaxkuTeXlkcTj7bmgB'           #This is secret_access_key
-  $bkt = 'em-ftpd-trial/annapurna'                          #This is bucket name
+  $bkt = 'em-ftpd-trial/annapurna'                             #This is bucket name
+  $current_dir = "/"
 
-  
+#change directory  
+def change_dir(path, &block)
+    yield path == "/" || path == "/files"
+  end
+
+  #list directory contents
+  def dir_contents(path, &block)
+    case path
+    when "/"      then
+      yield [ dir_item("files"), file_item("one.txt", FILE_ONE.bytesize) ]
+    when "/files" then
+      yield [ file_item("two.txt", FILE_TWO.bytesize) ]
+    else
+      yield []
+    end
+  end
+
+#get file size
+def bytes(path, &block)
+    AWS::S3::Base.establish_connection!(:access_key_id => $key, :secret_access_key => $skey) #here propery connection done
+    #length = AWS::S3::S3Object.size(path,'em-ftpd-trial/annapurna')
+    yield '#{$bkt}#{path}'.size                                               #here return size of file in bytes
+  end
+
 #user authentication code
   def authenticate(user, pass, &block)
     userArray = []
@@ -54,29 +78,41 @@ class FTPDriver
 	 return true
  end
 
-#upload file code
-  def put_file(path, data, &block)                                    #this is put file for upload file you can use at a time put file or put stream file
+ #upload file code
+  #def put_file(path, data, &block)                                    #this is put file for upload file you can use at a time put file or put stream file
   	 
-    AWS::S3::Base.establish_connection!(:access_key_id => $key, :secret_access_key => $skey)     #here propery connection done
-    AWS::S3::S3Object.store(path, open(data), $bkt)
-    yield File.size(data)                                                                         #here return size of file in bytes
-  end
+   # AWS::S3::Base.establish_connection!(:access_key_id => $key, :secret_access_key => $skey)     #here propery connection done
+    #AWS::S3::S3Object.store(path, open(data), $bkt)
+    #yield File.size(data)                                                                         #here return size of file in bytes
+#  end
  
   #upload streaming file code
-  #def put_file_streamed(path, data, &block)                   #this method is used for upload data by streaming
+ def put_file_streamed(path, data, &block)                   #this method is used for upload data by streaming
        
-   #  AWS::S3::Base.establish_connection!(:access_key_id => $key, :secret_access_key => $skey)	    #here propery connection done  
-    # data.on_stream { |chunk|
-     #AWS::S3::S3Object.store(path, chunk, $bkt)
-     #}
-    #yield '#{$bkt}#{path}'.size                                        #here return size of file in bytes
- #end
+     AWS::S3::Base.establish_connection!(:access_key_id => $key, :secret_access_key => $skey)	    #here propery connection done  
+     data.on_stream { |chunk|
+     AWS::S3::S3Object.store(path, chunk, $bkt)
+     }
+    yield '#{$bkt}#{path}'.size                                        #here return size of file in bytes
+ end
  
  #delete file code
   def delete_file(path, &block)
   	AWS::S3::Base.establish_connection!(:access_key_id => $key, :secret_access_key => $skey)             #here propery connection done  
   	AWS::S3::S3Object.delete path, $bkt                                                             #here file gets deleted
     yield true
+  end
+
+  #download file
+  def get_file(path, &block)
+      tmpfile = Tempfile.new("em-ftp")
+      tmpfile.binmode     
+       AWS::S3::Base.establish_connection!(:access_key_id => $key, :secret_access_key => $skey)  #here propery connection done
+      item = AWS::S3::S3Object.find '#{$bkt}#{path}'               #here finding perticular file
+      item.get.stream do |chunk|                                   
+      tmpfile.write chunk                                           #here file written thro' s3object
+      end           
+     yield File.size(tmpfile.path)                                   #here return size of file in bytes
   end
 
   private
